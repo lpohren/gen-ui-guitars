@@ -30,5 +30,14 @@ export default defineConfig(async () => {
 
   return {
     plugins,
+    preview: {
+      host: "0.0.0.0",
+      port: process.env.PORT ? parseInt(process.env.PORT) : 3000,
+      allowedHosts: [
+        ".railway.app", // Allow all Railway subdomains
+        "localhost",
+        "127.0.0.1",
+      ],
+    },
   };
 });
