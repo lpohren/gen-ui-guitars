@@ -1,18 +1,22 @@
-import { useNavigate } from "@tanstack/react-router";
-
+import { getBaseURL } from "../lib/config";
 import guitars from "../data/example-guitars";
 
-export default function GuitarRecommendation({ id }: { id: string }) {
-  const navigate = useNavigate();
+export default function GuitarRecommendationWidget({
+  id,
+  children,
+}: {
+  id: string;
+  children: React.ReactNode;
+}) {
   const guitar = guitars.find((guitar) => guitar.id === +id);
   if (!guitar) {
     return null;
   }
   return (
     <div className="my-4 rounded-lg overflow-hidden border border-green-500/20 bg-stone-800/50">
-      <div className="aspect-[4/3] relative overflow-hidden">
+      <div className="aspect-4/3 relative overflow-hidden">
         <img
-          src={guitar.image}
+          src={`${getBaseURL()}${guitar.image}`}
           alt={guitar.name}
           className="w-full h-full object-cover"
         />
@@ -26,17 +30,7 @@ export default function GuitarRecommendation({ id }: { id: string }) {
           <div className="text-lg font-bold text-emerald-400">
             ${guitar.price}
           </div>
-          <button
-            onClick={() => {
-              navigate({
-                to: "/example/guitars/$guitarId",
-                params: { guitarId: guitar.id.toString() },
-              });
-            }}
-            className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-1.5 rounded-lg text-sm hover:opacity-90 transition-opacity"
-          >
-            View Details
-          </button>
+          {children}
         </div>
       </div>
     </div>
