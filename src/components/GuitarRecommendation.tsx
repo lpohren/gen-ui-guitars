@@ -1,7 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
 
-import { showAIAssistant } from './AIAssistant'
-
 import guitars from '../data/example-guitars'
 
 export default function GuitarRecommendation({ id }: { id: string }) {
@@ -34,7 +32,6 @@ export default function GuitarRecommendation({ id }: { id: string }) {
                 to: '/example/guitars/$guitarId',
                 params: { guitarId: guitar.id.toString() },
               })
-              showAIAssistant.setState(() => false)
             }}
             className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-1.5 rounded-lg text-sm hover:opacity-90 transition-opacity"
           >

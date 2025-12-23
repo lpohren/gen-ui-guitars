@@ -1,7 +1,5 @@
 import { useNavigate } from '@tanstack/react-router'
 
-import { showAIAssistant } from './AIAssistant'
-
 import guitars from '../data/example-guitars'
 
 export default function GuitarComparison({
@@ -78,7 +76,6 @@ export default function GuitarComparison({
                   to: '/example/guitars/$guitarId',
                   params: { guitarId: guitar1.id.toString() },
                 })
-                showAIAssistant.setState(() => false)
               }}
               className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-lg text-sm hover:opacity-90 transition-opacity"
             >
@@ -138,7 +135,6 @@ export default function GuitarComparison({
                   to: '/example/guitars/$guitarId',
                   params: { guitarId: guitar2.id.toString() },
                 })
-                showAIAssistant.setState(() => false)
               }}
               className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-lg text-sm hover:opacity-90 transition-opacity"
             >
