@@ -27,7 +27,8 @@ ENV NODE_ENV=production
 # Copy package files
 COPY package.json package-lock.json* ./
 
-# Install all dependencies (needed for vite preview)
+# Install all dependencies including dev dependencies
+# vite preview needs dev dependencies to read vite.config.ts
 RUN npm ci
 
 # Copy built application
