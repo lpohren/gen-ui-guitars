@@ -4,7 +4,7 @@ export const getBaseURL = () => {
   }
   return (
     import.meta.env.VITE_APP_URL ||
-    "https://gen-ui-guitars-production.up.railway.app/"
+    "https://gen-ui-guitars-production.up.railway.app"
   );
 };
 
