@@ -40,7 +40,7 @@ function PlaceGuitarRecommendation() {
           });
         }}
       >
-        <button className="bg-linear-to-r from-orange-500 to-red-600 text-white px-4 py-1.5 rounded-lg text-sm hover:opacity-90 transition-opacity">
+        <button className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-1.5 rounded-lg text-sm hover:opacity-90 transition-opacity">
           View Details
         </button>
       </a>
