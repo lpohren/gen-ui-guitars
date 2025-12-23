@@ -4,7 +4,6 @@ export interface VendorCapabilities {
   chat: boolean
   structured: boolean
   image: boolean
-  transcription: boolean
   tts: boolean
 }
 
@@ -13,28 +12,24 @@ export const VENDOR_CAPABILITIES: Record<Provider, VendorCapabilities> = {
     chat: true,
     structured: true,
     image: true,
-    transcription: true,
     tts: true,
   },
   anthropic: {
     chat: true,
     structured: true,
     image: false,
-    transcription: false,
     tts: false,
   },
   gemini: {
     chat: true,
     structured: true,
     image: false,
-    transcription: false,
     tts: false,
   },
   ollama: {
     chat: true,
     structured: true,
     image: false,
-    transcription: false,
     tts: false,
   },
 }
