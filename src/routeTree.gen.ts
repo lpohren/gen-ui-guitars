@@ -9,15 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoGuitarchatRouteImport } from './routes/demo/guitarchat'
 import { Route as ExampleGuitarsIndexRouteImport } from './routes/example/guitars/index'
 import { Route as ExampleGuitarsGuitarIdRouteImport } from './routes/example/guitars/$guitarId'
 import { Route as DemoApiTtsRouteImport } from './routes/demo/api.tts'
-import { Route as DemoApiTranscriptionRouteImport } from './routes/demo/api.transcription'
 import { Route as DemoApiGuitarchatRouteImport } from './routes/demo/api.guitarchat'
 import { Route as DemoApiAvailableProvidersRouteImport } from './routes/demo/api.available-providers'
 
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,11 +48,6 @@ const DemoApiTtsRoute = DemoApiTtsRouteImport.update({
   path: '/demo/api/tts',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoApiTranscriptionRoute = DemoApiTranscriptionRouteImport.update({
-  id: '/demo/api/transcription',
-  path: '/demo/api/transcription',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DemoApiGuitarchatRoute = DemoApiGuitarchatRouteImport.update({
   id: '/demo/api/guitarchat',
   path: '/demo/api/guitarchat',
@@ -62,20 +62,20 @@ const DemoApiAvailableProvidersRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/mcp': typeof McpRoute
   '/demo/guitarchat': typeof DemoGuitarchatRoute
   '/demo/api/available-providers': typeof DemoApiAvailableProvidersRoute
   '/demo/api/guitarchat': typeof DemoApiGuitarchatRoute
-  '/demo/api/transcription': typeof DemoApiTranscriptionRoute
   '/demo/api/tts': typeof DemoApiTtsRoute
   '/example/guitars/$guitarId': typeof ExampleGuitarsGuitarIdRoute
   '/example/guitars': typeof ExampleGuitarsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mcp': typeof McpRoute
   '/demo/guitarchat': typeof DemoGuitarchatRoute
   '/demo/api/available-providers': typeof DemoApiAvailableProvidersRoute
   '/demo/api/guitarchat': typeof DemoApiGuitarchatRoute
-  '/demo/api/transcription': typeof DemoApiTranscriptionRoute
   '/demo/api/tts': typeof DemoApiTtsRoute
   '/example/guitars/$guitarId': typeof ExampleGuitarsGuitarIdRoute
   '/example/guitars': typeof ExampleGuitarsIndexRoute
@@ -83,10 +83,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/mcp': typeof McpRoute
   '/demo/guitarchat': typeof DemoGuitarchatRoute
   '/demo/api/available-providers': typeof DemoApiAvailableProvidersRoute
   '/demo/api/guitarchat': typeof DemoApiGuitarchatRoute
-  '/demo/api/transcription': typeof DemoApiTranscriptionRoute
   '/demo/api/tts': typeof DemoApiTtsRoute
   '/example/guitars/$guitarId': typeof ExampleGuitarsGuitarIdRoute
   '/example/guitars/': typeof ExampleGuitarsIndexRoute
@@ -95,30 +95,30 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/mcp'
     | '/demo/guitarchat'
     | '/demo/api/available-providers'
     | '/demo/api/guitarchat'
-    | '/demo/api/transcription'
     | '/demo/api/tts'
     | '/example/guitars/$guitarId'
     | '/example/guitars'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/mcp'
     | '/demo/guitarchat'
     | '/demo/api/available-providers'
     | '/demo/api/guitarchat'
-    | '/demo/api/transcription'
     | '/demo/api/tts'
     | '/example/guitars/$guitarId'
     | '/example/guitars'
   id:
     | '__root__'
     | '/'
+    | '/mcp'
     | '/demo/guitarchat'
     | '/demo/api/available-providers'
     | '/demo/api/guitarchat'
-    | '/demo/api/transcription'
     | '/demo/api/tts'
     | '/example/guitars/$guitarId'
     | '/example/guitars/'
@@ -126,10 +126,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  McpRoute: typeof McpRoute
   DemoGuitarchatRoute: typeof DemoGuitarchatRoute
   DemoApiAvailableProvidersRoute: typeof DemoApiAvailableProvidersRoute
   DemoApiGuitarchatRoute: typeof DemoApiGuitarchatRoute
-  DemoApiTranscriptionRoute: typeof DemoApiTranscriptionRoute
   DemoApiTtsRoute: typeof DemoApiTtsRoute
   ExampleGuitarsGuitarIdRoute: typeof ExampleGuitarsGuitarIdRoute
   ExampleGuitarsIndexRoute: typeof ExampleGuitarsIndexRoute
@@ -137,6 +137,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -172,13 +179,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoApiTtsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/api/transcription': {
-      id: '/demo/api/transcription'
-      path: '/demo/api/transcription'
-      fullPath: '/demo/api/transcription'
-      preLoaderRoute: typeof DemoApiTranscriptionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/demo/api/guitarchat': {
       id: '/demo/api/guitarchat'
       path: '/demo/api/guitarchat'
@@ -198,10 +198,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  McpRoute: McpRoute,
   DemoGuitarchatRoute: DemoGuitarchatRoute,
   DemoApiAvailableProvidersRoute: DemoApiAvailableProvidersRoute,
   DemoApiGuitarchatRoute: DemoApiGuitarchatRoute,
-  DemoApiTranscriptionRoute: DemoApiTranscriptionRoute,
   DemoApiTtsRoute: DemoApiTtsRoute,
   ExampleGuitarsGuitarIdRoute: ExampleGuitarsGuitarIdRoute,
   ExampleGuitarsIndexRoute: ExampleGuitarsIndexRoute,
